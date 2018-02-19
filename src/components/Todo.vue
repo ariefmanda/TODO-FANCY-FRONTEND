@@ -19,18 +19,18 @@
                         <tr v-for="todo of todos" :key="todo._id">
                             <td>{{todo.createdAt}}</td>
                             <td>
-                            <span uk-icon="icon: check" @click="success(todo._id,todo.ceklist)"></span>
+                            <span uk-icon="icon: check" style="cursor:pointer" @click="success(todo._id,todo.ceklist)"></span>
                             </td>
                             <td v-if="todo.ceklist==0">{{todo.content}}</td>
                             <td v-if="todo.ceklist==1"><strike>{{todo.content}}</strike></td>
                             <td>
-                                <span uk-icon="icon: trash" @click="destroy(todo._id)"></span>
+                                <span uk-icon="icon: trash" style="cursor:pointer" @click="destroy(todo._id)"></span>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                     <div id="formadd">
-                            <input class="uk-input uk-width-1-2" type="text" placeholder="add job" v-model="add">
+                            <input class="uk-input uk-width-1-2" type="text" placeholder="add job" id="emoji" v-model="add">
                             <button class="uk-button uk-button-primary" @click="addtodo">add</button>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
 
 <script>
 import axios from "axios";
-let url = "http://35.200.163.245:5902/api";
+let url = "http://feedomain.tk:5902/api";
 export default {
   name: "Todo",
   data() {
@@ -110,7 +110,7 @@ export default {
         console.log(this.add);
       axios
         .post(
-          "http://35.200.163.245:5902/api/todo",
+          `${url}/todo`,
           {
             content: this.add
           },
@@ -133,6 +133,5 @@ export default {
 </script>
 
 <style>
-
 </style>
 

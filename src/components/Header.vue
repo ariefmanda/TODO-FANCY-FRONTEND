@@ -39,7 +39,7 @@
 
 <script>
 import axios from "axios";
-let url = "http://35.200.163.245:5902/api";
+let url = "http://feedomain.tk:5902/api";
 export default {
   name: "Header",
   data() {
@@ -53,7 +53,6 @@ export default {
     terbang() {
       this.login(e=>{
           this.datalogin();
-
       });
     },
     login(cb) {
@@ -62,7 +61,6 @@ export default {
           if (response.authResponse) {
             localStorage.setItem("fbtoken", response.authResponse.accessToken);
             console.log("islogin connect", response);
-            console.log(localStorage);
             cb(response)
           } else {
             console.log(response, "belum connect");
@@ -81,7 +79,7 @@ export default {
       });
     },
     datalogin() {
-        console.log('masuk');
+        console.log('masuk',localStorage.getItem("fbtoken"));
       axios
         .get(`${url}/auth`, {
           headers: {
@@ -89,7 +87,7 @@ export default {
           }
         })
         .then(data => {
-            console.log('masuk');
+            console.log('masuk',data.data);
           this.name = data.data.name;
           this.token = data.data.token;
           localStorage.setItem("name", data.data.name);
@@ -98,7 +96,6 @@ export default {
           localStorage.setItem("image_url", data.data.image_url);
           this.image_url = data.data.image_url;
           console.log('haihai',localStorage);
-
           this.$router.push({
               name:'todo'
           })
